@@ -33,3 +33,9 @@ class MyClass extends AsyncConstructor {
   console.log(a.completed) // Print true after 5000ms
 })()
 ```
+
+## API
+
+### AsyncConstructor
+
+**constructor(asyncConstructor: () => Promise\<void>)**
