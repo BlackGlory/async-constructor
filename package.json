@@ -1,0 +1,26 @@
+{
+  "name": "async-constructor",
+  "version": "0.1.0",
+  "description": "A base class that helps you to create the class that contains asynchronous constructor",
+  "main": "lib/async-constructor.js",
+  "typings": "lib/async-constructor.d.ts",
+  "repository": "git@github.com:BlackGlory/async-constructor.git",
+  "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
+  "license": "MIT",
+  "scripts": {
+    "precommit": "yarn lint && yarn test",
+    "prepublishOnly": "yarn build",
+    "test": "node --harmony ./node_modules/jest/bin/jest.js --coverage --config jest.config.json",
+    "build": "tsc --outDir lib",
+    "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "coveralls": "^3.0.1",
+    "husky": "^0.14.3",
+    "jest": "^23.0.1",
+    "ts-jest": "^22.4.6",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
+  }
+}

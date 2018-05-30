@@ -1,0 +1,17 @@
+{
+  "transform": {
+    "^.+\\.tsx?$": "ts-jest"
+  }
+, "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$"
+, "coveragePathIgnorePatterns": [
+    "<rootDir>/test/"
+  ]
+, "moduleFileExtensions": [
+    "ts"
+  , "tsx"
+  , "js"
+  , "jsx"
+  , "json"
+  , "node"
+  ]
+}

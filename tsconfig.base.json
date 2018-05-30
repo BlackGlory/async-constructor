@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS"
+  , "target": "ESNext"
+  , "strict": true
+  , "removeComments": true
+  , "sourceMap": true
+  , "declaration": true
+  , "alwaysStrict": true
+  }
+}
