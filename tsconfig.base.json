@@ -1,11 +1,19 @@
 {
   "compilerOptions": {
     "module": "CommonJS"
-  , "target": "ESNext"
+  , "outDir": "lib"
   , "strict": true
   , "removeComments": true
   , "sourceMap": true
   , "declaration": true
   , "alwaysStrict": true
   }
+, "include": [
+    "src"
+  ]
+, "exclude": [
+    "node_modules"
+  , "lib"
+  , "test"
+  ]
 }

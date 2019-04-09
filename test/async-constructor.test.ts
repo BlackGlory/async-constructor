@@ -1,14 +1,14 @@
 import { AsyncConstructor } from '../src/async-constructor'
 
 test('async constructor', async () => {
-  function delay(timeout) {
+  function delay(timeout: number) {
     return new Promise(resolve => setTimeout(() => resolve(), timeout))
   }
 
   class MyClass extends AsyncConstructor {
     completed: boolean
 
-    constructor(timeout) {
+    constructor(timeout: number) {
       super(async () => {
         await delay(timeout)
         this.completed = true

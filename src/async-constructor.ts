@@ -3,12 +3,10 @@ export class AsyncConstructor {
 
   constructor(asyncConstructor: () => Promise<void>) {
     const init = (async () => {
-      await asyncConstructor()
+      await asyncConstructor.call(this)
       delete this.then
       return this
     })()
     this.then = init.then.bind(init)
   }
 }
-
-export default AsyncConstructor

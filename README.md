@@ -5,20 +5,25 @@ A base class that helps you to create the class that contains asynchronous const
 ## Install
 
 ```sh
+npm install --save async-constructor
 yarn add async-constructor
 ```
 
 ## Usage
 
-```js
+### target ES2017+
+
+```ts
 import { AsyncConstructor } from 'async-constructor'
 
-function delay(timeout) {
+function delay(timeout: number) {
   return new Promise(resolve => setTimeout(() => resolve(), timeout))
 }
 
 class MyClass extends AsyncConstructor {
-  constructor(timeout) {
+  completed: boolean
+
+  constructor(timeout: number) {
     super(async () => {
       await delay(timeout)
       this.completed = true
@@ -33,6 +38,38 @@ class MyClass extends AsyncConstructor {
   console.log(a.completed) // Print true after 5000ms
 })()
 ```
+
+### target ES6
+
+Note: Sync constructor will not throw an error.
+
+```ts
+import { AsyncConstructor } from 'async-constructor/lib/es6'
+
+function delay(timeout: number) {
+  return new Promise(resolve => setTimeout(() => resolve(), timeout))
+}
+
+class MyClass extends AsyncConstructor {
+  completed: boolean
+
+  constructor(timeout: number) {
+    super(async function(this: MyClass) {
+      await delay(timeout)
+      this.completed = true
+    })
+
+    this.completed = false
+  }
+}
+
+;(async () => {
+  const a = await new MyClass(5000)
+  console.log(a.completed) // Print true after 5000ms
+})()
+```
+
+See also: [#1](async-constructor/issues/1)
 
 ## API
 

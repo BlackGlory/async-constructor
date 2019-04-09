@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.base.json"
 , "compilerOptions": {
-    "target": "esnext"
+    "target": "es6"
+  , "outDir": "lib/es6"
   }
 }
