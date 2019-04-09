@@ -69,7 +69,7 @@ class MyClass extends AsyncConstructor {
 })()
 ```
 
-See also: [#1](async-constructor/issues/1)
+See also: [#1](https://github.com/BlackGlory/async-constructor/issues/1)
 
 ## API
 
