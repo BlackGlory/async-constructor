@@ -1,12 +1,7 @@
-export class AsyncConstructor {
-  then?: any
+import { appendAsyncConstructor } from './append-async-constructor'
 
+export class AsyncConstructor {
   constructor(asyncConstructor: () => Promise<void>) {
-    const init = (async () => {
-      await asyncConstructor.call(this)
-      delete this.then
-      return this
-    })()
-    this.then = init.then.bind(init)
+    appendAsyncConstructor(this, asyncConstructor)
   }
 }

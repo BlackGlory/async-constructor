@@ -20,6 +20,7 @@
   , "no-string-literal": false
   , "max-line-length": false
   , "no-construct": false
+  , "no-empty": false
   }
 , "rulesDirectory": []
 }

@@ -1,43 +1,49 @@
-import { AsyncConstructor } from '../src/async-constructor'
+import { AsyncConstructor, appendAsyncConstructor } from '../src'
 
-test('async constructor', async () => {
-  function delay(timeout: number) {
-    return new Promise(resolve => setTimeout(() => resolve(), timeout))
-  }
+const delay = (timeout: number) => new Promise(resolve => setTimeout(resolve, timeout))
+const getTime = () => new Date().getTime()
 
-  class MyClass extends AsyncConstructor {
-    completed: boolean
-
-    constructor(timeout: number) {
-      super(async () => {
-        await delay(timeout)
-        this.completed = true
-      })
-
-      this.completed = false
+describe('AsyncConstructor', () => {
+  test('Call once', async () => {
+    class One extends AsyncConstructor {
+      spend = 0
+      constructor(start: number) {
+        super(async () => {
+          await delay(1000)
+          this.spend = getTime() - start
+        })
+      }
     }
-  }
 
-  const start = Date.now()
-  const result = await new MyClass(1000)
-  const end = Date.now()
-  expect(result.completed).toBeTruthy()
-  expect(end - start).toBeGreaterThanOrEqual(1000)
-})
+    const one = await new One(getTime())
+    expect(one.spend).toBeGreaterThanOrEqual(1000)
+    expect(one.spend).toBeLessThan(2000)
+  })
 
-test('sync constructor', async () => {
-  class MyClass extends AsyncConstructor {
-    completed: boolean
-
-    constructor() {
-      super(() => {
-        return Promise.resolve()
-      })
-
-      this.completed = true
+  test('Call twice', async () => {
+    class One extends AsyncConstructor {
+      spend = 0
+      constructor(protected start: number) {
+        super(async () => {
+          await delay(1000)
+          this.spend = getTime() - start
+        })
+      }
     }
-  }
 
-  const result = await new MyClass()
-  expect(result.completed).toBeTruthy()
+    class Two extends One {
+      constructor(start: number) {
+        super(start)
+
+        appendAsyncConstructor(this, async () => {
+          await delay(1000)
+          this.spend = getTime() - this.start
+        })
+      }
+    }
+
+    const two = await new Two(getTime())
+    expect(two.spend).toBeGreaterThanOrEqual(2000)
+    expect(two.spend).toBeLessThan(3000)
+  })
 })

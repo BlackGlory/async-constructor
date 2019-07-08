@@ -1,26 +1,27 @@
 {
   "name": "async-constructor",
-  "version": "0.2.0",
-  "description": "A base class that helps you to create the class that contains asynchronous constructor",
+  "version": "0.3.0",
+  "description": "The helper functions for creating classes that require asynchronous constructors.",
   "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "repository": "git@github.com:BlackGlory/async-constructor.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "yarn clean && yarn lint && yarn test && yarn build",
     "test": "jest --coverage --config jest.config.json",
-    "build": "tsc && tsc --project tsconfig.es6.json",
+    "clean": "rm -rf lib",
+    "build": "tsc --project tsconfig.build.esnext.json && tsc --project tsconfig.build.es6.json",
     "lint": "tslint -t codeFrame 'src/**/*.ts' 'test/**/*.ts'"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.11",
-    "coveralls": "^3.0.3",
-    "husky": "^1.3.1",
-    "jest": "^24.7.1",
+    "@types/jest": "^24.0.15",
+    "coveralls": "^3.0.4",
+    "husky": "^3.0.0",
+    "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
-    "tslint": "^5.15.0",
-    "typescript": "^3.4.2"
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
   },
   "husky": {
     "hooks": {
