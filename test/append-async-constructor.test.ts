@@ -6,7 +6,7 @@ const getTime = () => new Date().getTime()
 describe('appendAsyncConstructor', () => {
   test('Call sync', async () => {
     class One {
-      spend = 0
+      spend?: number
 
       constructor(protected start: number) {
         appendAsyncConstructor(this, async () => {
@@ -16,7 +16,8 @@ describe('appendAsyncConstructor', () => {
     }
 
     const one = await new One(getTime())
-    expect(one.spend).toBeGreaterThan(0)
+    expect(one.spend).toBeDefined()
+    expect(one.spend).toBeGreaterThanOrEqual(0)
     expect(one.spend).toBeLessThan(1000)
   })
 
