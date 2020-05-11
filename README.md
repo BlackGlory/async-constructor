@@ -1,13 +1,12 @@
-# async-constructor [![npm](https://img.shields.io/npm/v/async-constructor.svg?maxAge=86400)](https://www.npmjs.com/package/async-constructor) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackGlory/async-constructor/master/LICENSE) [![Build Status](https://travis-ci.org/BlackGlory/async-constructor.svg?branch=master)](https://travis-ci.org/BlackGlory/async-constructor) [![Coverage Status](https://coveralls.io/repos/github/BlackGlory/async-constructor/badge.svg)](https://coveralls.io/github/BlackGlory/async-constructor)
+# async-constructor [![npm](https://img.shields.io/npm/v/async-constructor.svg?maxAge=86400)](https://www.npmjs.com/package/async-constructor) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BlackGlory/async-constructor/master/LICENSE)
 
-The helper functions for creating classes that require asynchronous constructors.
-
-Since v0.3.0, async constructor will always run asynchronously, and `then` method hidden in TypeScript.
+The helper functions for creating classes that require async constructors.
 
 ## Install
 
 ```sh
 npm install --save async-constructor
+# or
 yarn add async-constructor
 ```
 
@@ -17,23 +16,7 @@ This module is created for [TypeScript](#TypeScript), but can also be used in [J
 
 ### JavaScript
 
-```js
-import { AsyncConstructor } from 'async-constructor'
-
-class Resource extends AsyncConstructor {
-  constructor(url) {
-    super(async () => {
-      this.content = await load(url)
-    })
-  }
-}
-
-;(async () => {
-  const resource = await new Resource('data.json')
-})()
-```
-
-You may not need the module because JavaScript constructor could create an async constructor like
+You may not need the module because JavaScript constructor could return a `Promise<this>`:
 
 ```js
 class Resource {
@@ -61,13 +44,13 @@ function Resource(url) {
 
 #### AsyncConstructor
 
-##### ES2017+
+##### ES2017
 
 ```ts
 import { AsyncConstructor } from 'async-constructor'
 
 class Resource extends AsyncConstructor {
-  content?: any
+  content!: string
 
   constructor(url: string) {
     super(async () => {
@@ -76,18 +59,16 @@ class Resource extends AsyncConstructor {
   }
 }
 
-;(async () => {
-  const resource = await new Resource('data.json')
-})()
+const resource = await new Resource('data.txt')
 ```
 
-##### ES6
+##### ES2015
 
 ```ts
-import { AsyncConstructor } from 'async-constructor/lib/es6'
+import { AsyncConstructor } from 'async-constructor/lib/es2015'
 
 class Resource extends AsyncConstructor {
-  content?: any
+  content!: any
 
   constructor(url: string) {
     super(async function(this: Resource) {
@@ -97,19 +78,17 @@ class Resource extends AsyncConstructor {
 }
 
 ;(async () => {
-  const resource = await new Resource('data.json')
+  const resource = await new Resource('data.txt')
 })()
 ```
 
-#### appendAsyncConstructor
-
-you can create an asynchronous constructor directly with `appendAsyncConstructor` without using AsyncConstructor.
+you can create an async constructor directly with `appendAsyncConstructor` without using AsyncConstructor.
 
 ```ts
 import { appendAsyncConstructor } from 'async-constructor'
 
 class Resource {
-  content?: any
+  content!: string
 
   constructor(url: string) {
     appendAsyncConstructor(this, async () => {
@@ -119,143 +98,74 @@ class Resource {
 }
 
 ;(async () => {
-  const resource = await new Resource('data.json')
+  const resource = await new Resource('data.txt')
 })()
 ```
 
-#### Extend
-
-Once a class uses an asynchronous constructor, its subclasses will also become asynchronous constructors.
-
-```js
-import { AsyncConstructor } from 'async-constructor'
-
-class Resource extends AsyncConstructor {
-  content?: any
-
-  constructor(url: string) {
-    super(async () => {
-      this.content = await load(url)
-    })
-  }
-}
-
-class DataResource extends Resource {
-  constructor() {
-    super('data.json')
-  }
-}
-
-;(async () => {
-  const resource = await new DataResource()
-})
-```
-
-It is not recommended that you add other synchronization code to the constructor, but it is safe to add a new async constructor via the helper funciton.
-
-```js
-import { AsyncConstructor, appendAsyncConstructor } from 'async-constructor'
-
-class Resource extends AsyncConstructor {
-  content?: any
-
-  constructor(url: string) {
-    super(async () => {
-      this.content = await load(url)
-    })
-  }
-}
-
-class DataResource extends Resource {
-  constructor(eof: string) {
-    super('data.json')
-
-    appendAsyncConstructor(this, async () => {
-      this.content += eof
-    })
-  }
-}
-
-;(async () => {
-  const resource = await new DataResource('\n')
-})
-```
-
-`appendAsyncConstructor` can be called multiple times, the asynchronous constructors will be called in order.
-
-#### mixinAsyncConstructor & addAsyncConstructor
-
-The mixin function `mixinAsyncConstructor` and decorator function `addAsyncConstructor` are also used to add asynchronous constructors to classes, but you cannot access protected/private member in the async constructor.
-
-These are pure TypeScript features that cannot be build as JavaScript files, so you need to import TypeScript file directly.
+#### appendAsyncConstructor
 
 ```ts
-import { mixinAsyncConstructor } from 'async-constructor/src/mixin'
-
-class Base {
-  content?: any
-  constructor(url: string) {}
-}
-
-const Resource = mixinAsyncConstructor(
-  Base
-, async function(this: Base, url: string) {
-    this.content = await load(url)
-  }
-)
-
-;(async () => {
-  const resource = await new Resource('data.json')
-})()
+function appendAsyncConstructor<T extends any, U extends any[]>(
+  target: T
+, asyncConstructor: (...args: U) => PromiseLike<void>
+, args?: U
+): void
 ```
 
-```ts
-import { addAsyncConstructor } from 'async-constructor/src/decorator'
+Once a class has an async constructor, its subclasses will also have async constructors.
 
-@addAsyncConstructor<typeof Resource>(
-  async function(this: Resource, url: string) {
-    this.content = await load(url)
-  }
-)
+The function `AsyncConstructor` is a wrapper for `appendAsyncConstructor`, you can call `appendAsyncConstructor` in the sync constructor to append an async constructor.
+
+```js
+import { appendAsyncConstructor } from 'async-constructor'
+
 class Resource {
-  content?: any
-  constructor(url: string) {}
+  content!: string
+
+  constructor(url: string) {
+    appendAsyncConstructor(this, async () => {
+      this.content = await load(url)
+    })
+  }
 }
 
-;(async () => {
-  const resource = await new Resource('data.json')
-})()
+class DataResource extends Resource {
+  constructor(append: string) {
+    super('data.txt')
+
+    appendAsyncConstructor(this, async () => {
+      this.content += append
+    })
+  }
+}
+
+const resource = await new DataResource('\n')
 ```
 
-You can continue to use the asynchronous constructor to mixin new asynchronous constructors on the class, and the asynchronous constructors will be called in order.
+The multiple async constructors will be called in order, and always called after all sync constructor.
+
+#### mixinAsyncConstructor
 
 ```ts
-import { mixinAsyncConstructor } from 'async-constructor/src/mixin'
+function mixinAsyncConstructor<Base extends Constructor>(
+  base: Base
+, asyncConstructor: (...args: ConstructorParameters<Base>) => PromiseLike<void>
+): new (...args: ConstructorParameters<Base>) => PromiseLike<ReturnTypeOfConstructor<Base>>
+```
+
+The mixin function `mixinAsyncConstructor` is also used to add async constructors to classes, but you cannot access protected/private member in the async constructor.
+
+```ts
+import { mixinAsyncConstructor } from 'async-constructor'
 
 class Base {
-  content?: any
+  content!: string
   constructor(url: string) {}
 }
 
-const Resource = mixinAsyncConstructor(
-  Base
-, async function(this: Base, url: string) {
-    this.content = await load(url)
-  }
-)
+const Resource = mixinAsyncConstructor(Base , async function(this: Base, url) {
+  this.content = await load(url)
+})
 
-type ReturnTypeOfConstructor<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any
-
-const DisposableResource = mixinAsyncConstructor(
-  Resource
-, async function(this: ReturnTypeOfConstructor<typeof Resource>, url: string) {
-    await remove(url)
-  }
-)
-
-;(async () => {
-  const resource = await new DisposableResource('data.json')
-})()
+const resource = await new Resource('data.txt')
 ```
-
-The decorator base on the mixin function, so this can also work on the decorator, but this is not recommended because the code semantics are terrible.

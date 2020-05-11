@@ -1,7 +1,7 @@
-import { appendAsyncConstructor } from './append-async-constructor'
+import { appendAsyncConstructor } from './append'
 
 export class AsyncConstructor {
-  constructor(asyncConstructor: () => Promise<void>) {
+  constructor(asyncConstructor: () => PromiseLike<void>) {
     appendAsyncConstructor(this, asyncConstructor)
   }
 }

@@ -4,9 +4,9 @@
     "declaration": true
   , "removeComments": true
   , "sourceMap": true
+  , "outDir": "lib"
   }
 , "include": [
-    "src/index.ts"
-  , "src/async-constructor.ts"
+    "src"
   ]
 }

@@ -1,7 +1,14 @@
 {
   "compilerOptions": {
-    "module": "commonjs"
+    "target": "ES2019"
+  , "module": "CommonJS"
   , "strict": true
-  , "experimentalDecorators": true
+  , "noUnusedLocals": true
+  , "noUnusedParameters": true
+  , "baseUrl": "."
+  , "paths": {
+      "@src/*": ["src/*"]
+    , "@test/*": ["__tests__/*"]
+    }
   }
 }
