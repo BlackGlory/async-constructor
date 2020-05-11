@@ -82,26 +82,6 @@ class Resource extends AsyncConstructor {
 })()
 ```
 
-you can create an async constructor directly with `appendAsyncConstructor` without using AsyncConstructor.
-
-```ts
-import { appendAsyncConstructor } from 'async-constructor'
-
-class Resource {
-  content!: string
-
-  constructor(url: string) {
-    appendAsyncConstructor(this, async () => {
-      this.content = await load(url)
-    })
-  }
-}
-
-;(async () => {
-  const resource = await new Resource('data.txt')
-})()
-```
-
 #### appendAsyncConstructor
 
 ```ts
