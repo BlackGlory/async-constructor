@@ -1,13 +1,28 @@
 import typescript from '@rollup/plugin-typescript'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
 
 function createOptions({ directory, target }) {
   return [
     {
       input: 'src/index.ts'
     , output: createOutput('index')
-    , plugins: createPlugins(target)
+    , plugins: [
+        typescript({ target })
+      , commonjs()
+      , resolve()
+      ]
+    }
+  , {
+      input: 'src/index.ts'
+    , output: createMinification('index')
+    , plugins: [
+        typescript({ target })
+      , commonjs()
+      , resolve()
+      , terser()
+      ]
     }
   ]
 
@@ -27,11 +42,19 @@ function createOptions({ directory, target }) {
     ]
   }
 
-  function createPlugins(target) {
+  function createMinification(name) {
     return [
-      typescript({ target })
-    , commonjs()
-    , resolve()
+      {
+        file: `dist/${directory}/${name}.min.mjs`
+      , format: 'es'
+      , sourcemap: true
+      }
+    , {
+        file: `dist/${directory}/${name}.umd.min.js`
+      , format: 'umd'
+      , name: 'AsyncConstructor'
+      , sourcemap: true
+      }
     ]
   }
 }
