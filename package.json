@@ -14,7 +14,7 @@
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint src/** __tests__/** --ext .js,.jsx,.ts,.tsx --quiet",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src __tests__",
     "test": "jest --config jest.config.js",
     "coverage": "jest --coverage --config jest.config.js",
     "prepublishOnly": "yarn clean && yarn build && yarn bundle",
