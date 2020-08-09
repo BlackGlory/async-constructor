@@ -1,5 +1,5 @@
 import { appendAsyncConstructor } from '@src/append'
-import { isPromise } from 'extra-promise'
+import { isPromiseLike } from 'extra-promise'
 
 describe('appendAsyncConstructor(target: T, asyncConstructor: (...args: any) => PromiseLike<void>, args: unknown[])', () => {
   describe('append once', () => {
@@ -13,11 +13,11 @@ describe('appendAsyncConstructor(target: T, asyncConstructor: (...args: any) => 
       }
 
       const result = new ClassAsync()
-      const isProBefore = isPromise(result)
+      const isProBefore = isPromiseLike(result)
       const calledTimesBefore = calledTimes(logger)
       const proResult = await result
       const calledTimesAfter = calledTimes(logger)
-      const isProAfter = isPromise(result)
+      const isProAfter = isPromiseLike(result)
 
       expect(isProBefore).toBe(true)
       expect(calledTimesBefore).toBe(1)
@@ -41,11 +41,11 @@ describe('appendAsyncConstructor(target: T, asyncConstructor: (...args: any) => 
       }
 
       const result = new ClassAsync()
-      const isProBefore = isPromise(result)
+      const isProBefore = isPromiseLike(result)
       const calledTimesBefore = calledTimes(logger)
       const proResult = await result
       const calledTimesAfter = calledTimes(logger)
-      const isProAfter = isPromise(result)
+      const isProAfter = isPromiseLike(result)
 
       expect(isProBefore).toBe(true)
       expect(calledTimesBefore).toBe(1)

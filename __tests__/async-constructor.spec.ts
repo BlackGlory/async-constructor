@@ -1,5 +1,5 @@
 import { AsyncConstructor } from '@src/async-constructor'
-import { isPromise } from 'extra-promise'
+import { isPromiseLike } from 'extra-promise'
 
 describe('AsyncConstructor', () => {
   describe('class extends AsyncConstructor', () => {
@@ -13,11 +13,11 @@ describe('AsyncConstructor', () => {
       }
 
       const result = new ClassAsync()
-      const isProBefore = isPromise(result)
+      const isProBefore = isPromiseLike(result)
       const calledTimesBefore = calledTimes(logger)
       const proResult = await result
       const calledTimesAfter = calledTimes(logger)
-      const isProAfter = isPromise(result)
+      const isProAfter = isPromiseLike(result)
 
       expect(isProBefore).toBe(true)
       expect(calledTimesBefore).toBe(1)
@@ -47,11 +47,11 @@ describe('AsyncConstructor', () => {
       }
 
       const result = new ChildClassAsync()
-      const isProBefore = isPromise(result)
+      const isProBefore = isPromiseLike(result)
       const calledTimesBefore = calledTimes(logger)
       const proResult = await result
       const calledTimesAfter = calledTimes(logger)
-      const isProAfter = isPromise(result)
+      const isProAfter = isPromiseLike(result)
 
       expect(isProBefore).toBe(true)
       expect(calledTimesBefore).toBe(2)

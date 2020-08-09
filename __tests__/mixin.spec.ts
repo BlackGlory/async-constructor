@@ -1,5 +1,5 @@
 import { mixinAsyncConstructor } from '@src/mixin'
-import { isPromise } from 'extra-promise'
+import { isPromiseLike } from 'extra-promise'
 
 describe('mixinAsyncConstructor(base: Base, asyncConstructor: (...args: ConstructorParameters<Base>): new (...args: ConstructorParameters<Base>) => PromiseLike<Base>', () => {
   describe('mixin a sync class', () => {
@@ -13,11 +13,11 @@ describe('mixinAsyncConstructor(base: Base, asyncConstructor: (...args: Construc
       const ClassAsync = mixinAsyncConstructor(Class, async () => logger('Async'))
 
       const result = new ClassAsync()
-      const isProBefore = isPromise(result)
+      const isProBefore = isPromiseLike(result)
       const calledTimesBefore = calledTimes(logger)
       const proResult = await result
       const calledTimesAfter = calledTimes(logger)
-      const isProAfter = isPromise(result)
+      const isProAfter = isPromiseLike(result)
 
       expect(isProBefore).toBe(true)
       expect(calledTimesBefore).toBe(1)
@@ -42,11 +42,11 @@ describe('mixinAsyncConstructor(base: Base, asyncConstructor: (...args: Construc
       const ChildClassAsync = mixinAsyncConstructor(ClassAsync, async () => logger('ChildAsync'))
 
       const result = new ChildClassAsync()
-      const isProBefore = isPromise(result)
+      const isProBefore = isPromiseLike(result)
       const calledTimesBefore = calledTimes(logger)
       const proResult = await result
       const calledTimesAfter = calledTimes(logger)
-      const isProAfter = isPromise(result)
+      const isProAfter = isPromiseLike(result)
 
       expect(isProBefore).toBe(true)
       expect(calledTimesBefore).toBe(1)

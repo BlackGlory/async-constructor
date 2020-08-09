@@ -1,4 +1,4 @@
-import { isPromise } from 'extra-promise'
+import { isPromiseLike } from 'extra-promise'
 
 type Thenable<T> = T & { then: PromiseLike<any>['then'] }
 
@@ -14,7 +14,7 @@ export function appendAsyncConstructor<T extends any, U extends any[]>(
     return target
   }
 
-  if (isPromise(target)) {
+  if (isPromiseLike(target)) {
     setThenMethod(target, Promise.resolve(target).then(applyAsyncConstructor))
   } else {
     setThenMethod(target, applyAsyncConstructor())
