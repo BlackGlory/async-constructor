@@ -13,8 +13,6 @@
   ],
   "main": "lib/es2017/index.js",
   "types": "lib/es2017/index.d.ts",
-  "module": "dist/es2017/index.mjs",
-  "browser": "dist/es2017/index.umd.js",
   "repository": "git@github.com:BlackGlory/async-constructor.git",
   "author": "BlackGlory <woshenmedoubuzhidao@blackglory.me>",
   "license": "MIT",
