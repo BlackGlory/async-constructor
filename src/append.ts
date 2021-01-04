@@ -1,6 +1,6 @@
 import { isPromiseLike } from 'extra-promise'
 
-type Thenable<T> = T & { then: PromiseLike<any>['then'] }
+type Thenable<T> = T & { then?: PromiseLike<any>['then'] }
 
 export function appendAsyncConstructor<T extends any, U extends any[]>(
   target: T
