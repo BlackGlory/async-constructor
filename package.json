@@ -19,7 +19,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --quiet src __tests__",
     "test": "jest --config jest.config.js",
-    "coverage": "jest --coverage --config jest.config.js",
+    "test:coverage": "jest --coverage --config jest.config.js",
     "prepublishOnly": "run-s clean build bundle",
     "clean": "run-p clean:*",
     "clean:build": "rimraf lib",
