@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.8](https://github.com/BlackGlory/async-constructor/compare/v0.4.7...v0.4.8) (2021-02-04)
+
+
+### Bug Fixes
+
+* bundle ([b982f9c](https://github.com/BlackGlory/async-constructor/commit/b982f9c5e3bc21542f3c050ea7acc21edf9d56a2))
+
 ### [0.4.7](https://github.com/BlackGlory/async-constructor/compare/v0.4.6...v0.4.7) (2021-02-04)
 
 ### [0.4.6](https://github.com/BlackGlory/async-constructor/compare/v0.4.5...v0.4.6) (2021-02-03)
