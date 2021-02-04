@@ -1,5 +1,5 @@
 dependencies:
-  extra-promise: 0.13.15
+  extra-promise: 0.14.2
 devDependencies:
   '@commitlint/cli': 11.0.0
   '@commitlint/config-conventional': 11.0.0
@@ -313,25 +313,26 @@ packages:
       node: '>=12'
     resolution:
       integrity: sha512-n0pCQ8JKx5Tw9QuNBWsokvOwX0oJn/qnEYWspSNaPzo/QrmZAiHhpIiPWHEhtmt8gLVsHw3dizw7iQbiOwR/ZA==
-  /@blackglory/structures/0.1.9:
+  /@blackglory/structures/0.1.11:
     dependencies:
       '@blackglory/errors': 0.1.5
     dev: false
     engines:
       node: '>=12'
     resolution:
-      integrity: sha512-p84Je95Waw74TOcf+2JX2RWl05IEm1i/qzrEJQriasr6mpb4Kn5jEnULibQYcEi/HoG6LoCtshOiYZvqlfIDLg==
-  /@blackglory/types/0.2.11:
+      integrity: sha512-e43L5H7lMwJuy4j96yXRRVXEx+kzM4O/har56wG3mCSq0VAyrCpStAWqx9nX7LAXH0r4NHEqPJbN9Vm3W/c6IA==
+  /@blackglory/types/0.2.12:
     dependencies:
-      '@types/node': 14.14.22
       ajv: 7.0.4
-      extra-dom: 0.2.9
+      extra-dom: 0.2.10
       jsdom: 16.4.0
     dev: false
     engines:
       node: '>=12'
+    peerDependencies:
+      '@types/node': ^14.14.22
     resolution:
-      integrity: sha512-FADvGYOCQZJsXTETrYHQ5NqaLfz+iCE/yPZQiE87xV+4JBAeSgyuB+j+mi3NwYWp+gTZQ3P+9KonnlezNW2kIw==
+      integrity: sha512-hwhAxk/BX+9VRO5bJH0pBM6veKO3cC1munMYs1c9jOzgx9XFCvrOwMxjinHg+oZA5kfIJqduEqwWAfEHkcOpyQ==
   /@cnakazawa/watch/1.0.4:
     dependencies:
       exec-sh: 0.3.4
@@ -929,6 +930,7 @@ packages:
     resolution:
       integrity: sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
   /@types/node/14.14.22:
+    dev: true
     resolution:
       integrity: sha512-g+f/qj/cNcqKkc3tFqlXOYjrmZA+jNBiDzbP3kH+B+otKFqAdPgVTGP1IeKRdMml/aE69as5S4FqtxAbl+LaMw==
   /@types/normalize-package-data/2.4.0:
@@ -2469,26 +2471,26 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Nmb6QXkELsuBr24CJSkilo6UHHgbekK5UiZgfE6UHD3Eb27YC6oD+bhcT+tJ6cl8dmsgdQxnWlcry8ksBIBLpw==
-  /extra-dom/0.2.9:
+  /extra-dom/0.2.10:
     dependencies:
-      '@blackglory/types': 0.2.11
-      iterable-operator: 0.13.0
+      '@blackglory/types': 0.2.12
+      iterable-operator: 0.13.2
     dev: false
     resolution:
-      integrity: sha512-rUkSC+cr8L3XqQ2SWjavk3YVh6xtW8LzowW36NQuyXhw8NVxHwEU64u06i0JBi0SQMitGPWZ4lViroMN1wOFWA==
-  /extra-promise/0.13.15:
+      integrity: sha512-bqSjWP3b3qPGuV7vt5N1OeJ/jaKfzQJj4lCpiTNZEp6cmZDL9/gi8+vCu8PbEXFzci576egs9LiZy5awxifHfg==
+  /extra-promise/0.14.2:
     dependencies:
       '@blackglory/errors': 0.1.5
-      '@blackglory/structures': 0.1.9
-      '@blackglory/types': 0.2.11
+      '@blackglory/structures': 0.1.11
+      '@blackglory/types': 0.2.12
       abort-controller: 3.0.0
       eventemitter3: 4.0.7
-      iterable-operator: 0.12.11
+      iterable-operator: 0.13.2
       reflect-metadata: 0.1.13
-      return-style: 0.11.5
+      return-style: 0.11.6
     dev: false
     resolution:
-      integrity: sha512-Bnpv2W1FDT5KtafVVW9Ljvuz8snsNt27dScaTe7VUfXHhH8qpJQv2XOPSZCV2+Yp4rj2EGxiOAFCPHxNK1ycqg==
+      integrity: sha512-QvCZzC4jMZ3TuJJcY91hWrdCXFjbXNFfO2JEjzqOV2rYap4wIHz12AR9scucNIOEBTj7v7KearnkqcRkEy3PBA==
   /extsprintf/1.3.0:
     engines:
       '0': node >=0.6.0
@@ -3495,18 +3497,12 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-9tZvz7AiR3PEDNGiV9vIouQ/EAcqMXFmkcA1CDFTwOB98OZVDL0PH9glHotf5Ugp6GCOTypfzGWI/OqjWNCRUw==
-  /iterable-operator/0.12.11:
+  /iterable-operator/0.13.2:
     dependencies:
-      '@blackglory/types': 0.2.11
+      '@blackglory/types': 0.2.12
     dev: false
     resolution:
-      integrity: sha512-f6g7Ftzxk4JyJNL19/tB1Lt7CnXQC2kcRQ2+SZX0RaSr8+3SuAPLAMzU515dRl5/yfK9YI0JdDvW+hL02+tShQ==
-  /iterable-operator/0.13.0:
-    dependencies:
-      '@blackglory/types': 0.2.11
-    dev: false
-    resolution:
-      integrity: sha512-/M2KRn+iVZPeeEO0ZubWU6w6sSvCC064bx30oTN9DKHERW4Jk8GUNZugFtIVXKcKnssnVtp5BPuUbejzIKs4Ig==
+      integrity: sha512-cVygsGfAl4FK+N88sY6CkvOzZCcCPkUZvhjjioGL4QcoUXD8N1aWZzzLYXmT3n2Xl/f4nbijz0Pha9qfIIpPkg==
   /jest-changed-files/26.6.2:
     dependencies:
       '@jest/types': 26.6.2
@@ -5317,10 +5313,10 @@ packages:
       node: '>=0.12'
     resolution:
       integrity: sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
-  /return-style/0.11.5:
+  /return-style/0.11.6:
     dev: false
     resolution:
-      integrity: sha512-Ml0QIZWXLJBu93zDFNkipvk6pG50vpqJA3VFpGmo+0+pGY1dx9Tl4GCdzPexnISnC3vIvrEty0egsVa++lnQgA==
+      integrity: sha512-ABrltlHQT20FC2pLgcNRqXSSk0vGb9U6GXTaRMCzm6858JpWIbNQU+cQUKX7Z1wLpngbBzdvtt5vblgGpB067Q==
   /reusify/1.0.4:
     dev: true
     engines:
@@ -6459,7 +6455,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^4.14.0
   '@typescript-eslint/parser': ^4.14.0
   eslint: ^7.18.0
-  extra-promise: ^0.13.13
+  extra-promise: ^0.14.2
   husky: ^4.3.8
   jest: ^26.6.3
   npm-run-all: ^4.1.5
