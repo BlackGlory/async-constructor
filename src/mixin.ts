@@ -1,8 +1,5 @@
+import { Constructor, ReturnTypeOfConstructor } from '@blackglory/types'
 import { appendAsyncConstructor } from './append'
-
-type Constructor<T = any> = new (...args: any[]) => T
-
-type ReturnTypeOfConstructor<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any
 
 export function mixinAsyncConstructor<Base extends Constructor>(
   base: Base

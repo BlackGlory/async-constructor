@@ -1,5 +1,5 @@
 import { appendAsyncConstructor } from '@src/append'
-import { isPromiseLike } from 'extra-promise'
+import { isPromiseLike } from '@blackglory/types'
 
 describe('appendAsyncConstructor(target: T, asyncConstructor: (...args: any) => PromiseLike<void>, args: unknown[])', () => {
   describe('append once', () => {
