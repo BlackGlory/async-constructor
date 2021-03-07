@@ -1,5 +1,5 @@
 import { AsyncConstructor } from '@src/async-constructor'
-import { isPromiseLike } from '@blackglory/types'
+import { isPromiseLike } from 'extra-promise'
 
 describe('AsyncConstructor', () => {
   describe('class extends AsyncConstructor', () => {

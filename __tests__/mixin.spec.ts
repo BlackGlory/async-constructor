@@ -1,5 +1,5 @@
 import { mixinAsyncConstructor } from '@src/mixin'
-import { isPromiseLike } from '@blackglory/types'
+import { isPromiseLike } from 'extra-promise'
 
 describe('mixinAsyncConstructor(base: Base, asyncConstructor: (...args: ConstructorParameters<Base>): new (...args: ConstructorParameters<Base>) => PromiseLike<Base>', () => {
   describe('mixin a sync class', () => {

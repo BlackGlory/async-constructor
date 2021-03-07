@@ -1,4 +1,4 @@
-import { isPromiseLike } from '@blackglory/types'
+import { isPromiseLike } from 'extra-promise'
 
 type Thenable<T> = T & { then?: PromiseLike<any>['then'] }
 
