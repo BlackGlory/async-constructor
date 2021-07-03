@@ -1,4 +1,5 @@
-import { Constructor, ReturnTypeOfConstructor } from 'hotypes'
+import { ReturnTypeOfConstructor } from 'hotypes'
+import { Constructor } from 'justypes'
 import { appendAsyncConstructor } from './append'
 
 export function mixinAsyncConstructor<Base extends Constructor<any>>(
