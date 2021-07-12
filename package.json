@@ -1,6 +1,6 @@
 {
   "name": "async-constructor",
-  "version": "0.4.15",
+  "version": "0.4.16",
   "description": "The helper functions for creating classes that require asynchronous constructors.",
   "keywords": [
     "AsyncConstructor",
